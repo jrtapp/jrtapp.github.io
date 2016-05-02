@@ -8,9 +8,25 @@
 	<title>Cameron Pittman: Portfolio</title>
 	<!-- Hmm, what is the impact of web fonts on speed? Measure it... -->
 	<link href="//fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
-	<link href="css/style.css" rel="stylesheet">
-	<link href="css/print.css" rel="stylesheet" media="print">
-	<script async src="js/perfmatters.js"></script>
+	<link href="css/style.min.css" rel="stylesheet">
+	<link href="css/print.min.css" rel="stylesheet" media="print">
+<!--	<script async src="js/perfmatters.js"></script>-->
+	<script>
+		// Measuring the Critical Rendering Path with Navigation Timing
+		// https://developers.google.com/web/fundamentals/performance/critical-rendering-path/measure-crp
+
+		function logCRP() {
+			var t = window.performance.timing,
+				dcl = t.domContentLoadedEventStart - t.domLoading,
+				complete = t.domComplete - t.domLoading;
+			var stats = document.getElementById("crp-stats");
+			stats.textContent = 'DCL: ' + dcl + 'ms, onload: ' + complete + 'ms';
+		}
+
+		window.addEventListener("load", function (event) {
+			logCRP();
+		});
+	</script>
 </head>
 <body>
 	<header>
